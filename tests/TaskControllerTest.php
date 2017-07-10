@@ -8,6 +8,7 @@
  */
 
 use Yoshi2889\Tasks\CallbackTask;
+use Yoshi2889\Tasks\RepeatableTask;
 use Yoshi2889\Tasks\TaskController;
 use PHPUnit\Framework\TestCase;
 
@@ -101,5 +102,30 @@ class TaskControllerTest extends TestCase
 
 		self::assertFalse($taskController->exists($callbackTask));
 		self::assertTrue($taskController->exists($callbackTask2));
+	}
+
+	public function testRunRepeatableTask()
+	{
+		$loop = \React\EventLoop\Factory::create();
+		$taskController = new TaskController($loop);
+
+		$callbackTask = new CallbackTask(function ()
+		{
+			echo 'Test';
+		}, 1);
+
+		$repeatableTask = new RepeatableTask($callbackTask, 1);
+
+		$taskController->add($repeatableTask);
+
+		sleep(1);
+
+		self::expectOutputString('Test');
+		$taskController->runTasks();
+
+		sleep(1);
+
+		self::expectOutputString('TestTest');
+		$taskController->runTasks();
 	}
 }
