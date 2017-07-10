@@ -1,0 +1,26 @@
+{
+    "name": "yoshi2889/tasks",
+    "description": "Simple task controller supporting multiple types of tasks.",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1.0",
+        "react/event-loop": "^0.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yoshi2889\\Tasks\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Yoshi2889",
+            "email": "rick.2889@gmail.com",
+            "homepage": "https://nanosector.nl",
+            "role": "Lead Developer"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
+    }
+}
