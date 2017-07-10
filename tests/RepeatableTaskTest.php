@@ -1,9 +1,10 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: rick2
- * Date: 10-7-2017
- * Time: 18:09
+ * Copyright 2017 NanoSector
+ *
+ * You should have received a copy of the MIT license with the project.
+ * See the LICENSE file for more information.
  */
 
 use PHPUnit\Framework\TestCase;
@@ -29,6 +30,47 @@ class RepeatableTaskTest extends TestCase
 
 		self::expectOutputString('Hello world');
 		$repeatableTask->run();
+	}
+
+	public function testRunWithNewChild()
+	{
+		$newCallbackTest = new CallbackTask(function ()
+		{
+			echo '... Test';
+		}, 1);
+
+		$callbackTask = new CallbackTask(function () use ($newCallbackTest)
+		{
+			echo 'Hello world';
+
+			return $newCallbackTest;
+		}, 1);
+
+		$repeatableTask = new RepeatableTask($callbackTask, 1);
+
+		sleep(2);
+
+		self::expectOutputString('Hello world');
+		$result = $repeatableTask->run();
+		self::assertEquals($repeatableTask, $result);
+
+		self::expectOutputString('Hello world... Test');
+		$repeatableTask->run();
+	}
+
+	public function testReplaceRepeatInterval()
+	{
+		$callbackTask = new CallbackTask(function ()
+		{
+			echo 'Hello world';
+		}, 5);
+
+		$repeatableTask = new RepeatableTask($callbackTask, 1);
+
+		self::assertEquals(1, $repeatableTask->getRepeatInterval());
+
+		$repeatableTask->setRepeatInterval(2);
+		self::assertEquals(2, $repeatableTask->getRepeatInterval());
 	}
 
 	public function testCancel()

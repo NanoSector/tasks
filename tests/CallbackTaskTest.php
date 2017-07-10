@@ -1,9 +1,10 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: rick2
- * Date: 10-7-2017
- * Time: 18:05
+ * Copyright 2017 NanoSector
+ *
+ * You should have received a copy of the MIT license with the project.
+ * See the LICENSE file for more information.
  */
 
 use Yoshi2889\Tasks\CallbackTask;
