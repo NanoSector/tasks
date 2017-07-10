@@ -53,7 +53,7 @@ class CallbackTask implements TaskInterface
 	public function cancel(): void
 	{
 		$this->callback = function () {};
-		$this->setExpiryTime(time() - 1);
+		$this->setExpiryTime(0);
 	}
 
 	/**
