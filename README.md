@@ -14,7 +14,7 @@ You can install this class via `composer`:
 ```composer require yoshi2889/tasks```
 
 ## Usage
-Create an instance of TaskController and add any instance of TaskInterface to it:
+Create an instance of `TaskController` and add any instance of `TaskInterface` to it:
 
 ```php
 <?php
@@ -78,7 +78,8 @@ Discarded tasks will be removed from the `TaskController`.
 ## Implementing custom Tasks
 The `TaskController` accepts any class that implements the `TaskInterface` interface. This interface contains the following methods:
 
-* `getExpiryTime(): int`: Gets the UNIX timestamp on which the task should be run and discarded afterwards.
+* `getExpiryTime(): int`: Gets the UNIX timestamp on which the task should be run and discarded afterwards. Please note that
+ by default, `TaskController` runs at a 1-second interval and timing might be slightly off.
 * `run(): ?TaskInterface`: Runs the actual task. Return an object implementing `TaskInterface` to insert a new task, or `null`
  to discard the current task.
 * `cancel(): void`: Used to cancel the task, or to bring it in a state where it cannot be run. It is a good idea to have
