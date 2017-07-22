@@ -1,6 +1,7 @@
 # Task Controller
-[![Build Status](https://scrutinizer-ci.com/g/Yoshi2889/tasks/badges/build.png?b=3.0)](https://scrutinizer-ci.com/g/Yoshi2889/tasks/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Yoshi2889/tasks/badges/quality-score.png?b=3.0)](https://scrutinizer-ci.com/g/Yoshi2889/tasks/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/Yoshi2889/tasks/badges/build.png)](https://scrutinizer-ci.com/g/Yoshi2889/tasks/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Yoshi2889/tasks/badges/quality-score.png)](https://scrutinizer-ci.com/g/Yoshi2889/tasks/?branch=master)
+[![Scrutinizer Code Coverage](https://scrutinizer-ci.com/g/Yoshi2889/tasks/badges/coverage.png)](https://scrutinizer-ci.com/g/Yoshi2889/tasks/code-structure/master/code-coverage)
 [![Latest Stable Version](https://poser.pugx.org/yoshi2889/tasks/v/stable)](https://packagist.org/packages/yoshi2889/tasks)
 [![Latest Unstable Version](https://poser.pugx.org/yoshi2889/tasks/v/unstable)](https://packagist.org/packages/yoshi2889/tasks)
 [![Total Downloads](https://poser.pugx.org/yoshi2889/tasks/downloads)](https://packagist.org/packages/yoshi2889/tasks)
