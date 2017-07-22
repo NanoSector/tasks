@@ -57,4 +57,43 @@ class CallbackTaskTest extends TestCase
 		self::assertEquals($callbackTask->getCallback(), $expectedCallback);
 		self::assertEquals($callbackTask->getExpiryTime(), $expectedExpiryTime);
 	}
+
+	public function testDiscard()
+	{
+		$loop = \React\EventLoop\Factory::create();
+		$taskController = new \Yoshi2889\Tasks\TaskController($loop);
+
+		$callbackTask = new CallbackTask(function ()
+		{
+			echo 'Hello world';
+		}, 0);
+		$taskController->add($callbackTask);
+		$this->expectOutputString('Hello world');
+		self::assertTrue($taskController->exists($callbackTask));
+		$taskController->runTasks();
+
+		// Check it again... (intentional, it shouldn't output Hello world again)
+		$this->expectOutputString('Hello world');
+		$taskController->runTasks();
+		self::assertFalse($taskController->exists($callbackTask));
+	}
+
+	public function testCancelDiscard()
+	{
+		$loop = \React\EventLoop\Factory::create();
+		$taskController = new \Yoshi2889\Tasks\TaskController($loop);
+
+		$callbackTask = new CallbackTask(function ()
+		{
+			echo 'Hello world';
+		}, 0);
+		$taskController->add($callbackTask);
+
+		$callbackTask->cancel();
+
+		$this->expectOutputString('');
+		self::assertTrue($taskController->exists($callbackTask));
+		$taskController->runTasks();
+		self::assertFalse($taskController->exists($callbackTask));
+	}
 }
