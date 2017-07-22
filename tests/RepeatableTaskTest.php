@@ -93,4 +93,28 @@ class RepeatableTaskTest extends TestCase
 		self::assertEquals($repeatableTask->getExpiryTime(), $expectedExpiryTime);
 		self::assertEquals($repeatableTask->getRepeatInterval(), $expectedRepeatInterval);
 	}
+
+	public function testCancelDiscard()
+	{
+		$loop = \React\EventLoop\Factory::create();
+		$taskController = new \Yoshi2889\Tasks\TaskController($loop);
+
+		$callbackTask = new CallbackTask(function () {
+			echo 'Hello world';
+		}, 1);
+
+		$repeatableTask = new RepeatableTask($callbackTask, 1);
+		$taskController->add($repeatableTask);
+
+		sleep(2);
+
+		$this->expectOutputString('Hello world');
+		$taskController->runTasks();
+		$this->assertTrue($taskController->exists($repeatableTask));
+
+		$repeatableTask->cancel();
+		$this->expectOutputString('Hello world');
+		$taskController->runTasks();
+		$this->assertFalse($taskController->exists($repeatableTask));
+	}
 }

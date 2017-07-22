@@ -54,7 +54,7 @@ class RepeatableTask implements TaskInterface
 		}
 
 		$this->expiryTime = $this->getExpiryTime() + $this->getRepeatInterval();
-		return $this;
+		return $this->expiryTime > 0 ? $this : null;
 	}
 
 	public function cancel(): void
