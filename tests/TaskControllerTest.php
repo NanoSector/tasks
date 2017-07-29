@@ -128,4 +128,22 @@ class TaskControllerTest extends TestCase
 		self::expectOutputString('TestTest');
 		$taskController->runTasks();
 	}
+
+    public function testRemoveAll()
+    {
+        $loop = \React\EventLoop\Factory::create();
+        $taskController = new TaskController($loop);
+
+        $callbackTask = new CallbackTask(function ()
+        {
+            echo 'Test';
+        }, 1);
+        
+        $taskController->add($callbackTask);
+        
+        $taskController->removeAll();
+        
+        self::assertFalse($taskController->exists($callbackTask));
+        self::assertEquals(0, $callbackTask->getExpiryTime());
+	}
 }

@@ -63,6 +63,15 @@ class TaskController
 		return true;
 	}
 
+    public function removeAll()
+    {
+        foreach ($this->tasks as $task)
+        {
+            $task->cancel();
+            $this->remove($task);
+        }
+	}
+
 	/**
 	 * @param TaskInterface $task
 	 *
